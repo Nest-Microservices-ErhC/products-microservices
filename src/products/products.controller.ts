@@ -28,12 +28,13 @@ export class ProductsController {
   // @Get()
   @MessagePattern({ cmd: 'find_all_product' })
   findAll(@Payload() paginationDto: PaginationDto) {
+    console.log('Payload recibido:', paginationDto);
     return this.productsService.findAll(paginationDto);
   }
 
   // @Get(':id')
   @MessagePattern({ cmd: 'find_one_product' })
-  findOne(@Payload('id', ParseIntPipe) id:number) {
+  findOne(@Payload('id', ParseIntPipe) id: number) {
     return this.productsService.findOne(id);
   }
 

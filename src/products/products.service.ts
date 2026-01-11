@@ -21,7 +21,7 @@ export class ProductsService {
     const skip = (page - 1) * limit;
 
     const [total, data] = await Promise.all([
-      this.prisma.product.count({ where: { available: true }}),
+      this.prisma.product.count({ where: { available: true } }),
       this.prisma.product.findMany({
         skip: Math.max(0, skip),
         take: limit,
@@ -35,7 +35,7 @@ export class ProductsService {
         skip: Math.max(0, (page - 1) * limit),
         take: limit,
         where: {
-          available: true
+          available: true,
         },
         // Ordenamos en forma ascendente
         orderBy: {
@@ -50,9 +50,11 @@ export class ProductsService {
     };
   }
 
+
+
   async findOne(id: number) {
     const product = await this.prisma.product.findUnique({
-      where: { id: id , available: true},
+      where: { id: id, available: true },
     });
     if (!product) {
       throw new NotFoundException(`Product with id #${id} not found`);
